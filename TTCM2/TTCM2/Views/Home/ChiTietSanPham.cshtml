@@ -1,0 +1,129 @@
+﻿@model Data.Products.ProductsDetail
+@{
+    ViewBag.Title = Model.Detail.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container pad-50">
+    <div class="row">
+        <div class="col-lg-5">
+            <div class="swiper-container gallery-top wsa-container wsa-gallery-top">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide imgs" style="background-image:url(/upload/Temp/@Model.Detail.images)"></div>
+                </div>
+                <!-- Add Arrows -->
+                <div class="swiper-button-next swiper-button-white"></div>
+                <div class="swiper-button-prev swiper-button-white"></div>
+            </div>
+            <div class="swiper-container gallery-thumbs wsa-gallery-thumbs">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide imgs" style="background-image:url(/upload/Temp/@Model.Detail.images)"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-7">
+            <p class="title-text">
+                @Model.Detail.Name
+            </p>
+            <div class="price">
+                <span>@string.Format("{0:#,0}", Model.Detail.PriceSale)đ</span>
+                <span>@string.Format("{0:#,0}", Model.Detail.Price)đ</span>
+            </div>
+
+            <div class="border-main">
+                <p class="CTSP-text1 @(string.IsNullOrEmpty(Model.Detail.Note) ? "hide": "")">
+                    @Model.Detail.Note
+                </p>
+
+                <div class="vonts-text1">
+                    <div class="row">
+                        <div class="col-lg-6 mar-bot-5">
+                            <b>Tình trạng:</b> @(Model.Detail.Active == true ? "Còn hàng" : "Hết hàng")
+                        </div>
+                        <div class="col-lg-6 mar-bot-5">
+                            <b>Xuất xứ:</b> @Model.Detail.MakeIn
+                        </div>
+                        <div class="col-lg-6 mar-bot-5">
+                            <b>Quy cách:</b> @Model.Detail.Type
+                        </div>
+                        <div class="col-lg-12 mar-bot-5">
+                            <b>Giấy phép:</b> @Model.Detail.Allower
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box-mua">
+                <input type="number" value="1" min="1" max="99" class="form-control intqia" id="nums" />
+                <button class="btn-muahang" type="button" onclick="addCart(@Model.Detail.Id)"> Mua Hàng</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="border-main">
+                <p class="title-text">
+                    chi tiết sản phẩm
+                </p>
+                <div class="GT-box">
+                    @Html.Raw(Model.Detail.NoteDetail)
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+        var galleryThumbs = new Swiper('.gallery-thumbs', {
+            spaceBetween: 10,
+            slidesPerView: 4,
+            loop: true,
+            freeMode: true,
+            loopedSlides: 5, //looped slides should be the same
+            watchSlidesVisibility: true,
+            watchSlidesProgress: true,
+        });
+        var galleryTop = new Swiper('.gallery-top', {
+            spaceBetween: 10,
+            loop: true,
+            loopedSlides: 5, //looped slides should be the same
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            thumbs: {
+                swiper: galleryThumbs,
+            },
+        });
+    </script>
+    <script>
+        function addCart(id) {
+            var num = $("#nums").val();
+
+            $.ajax({
+                type: "POST",
+                url: "/ajax/AddCart",
+                data: { 'IdProduct': id, 'number': num },
+                dataType: "json",
+                success: function (msg) {
+                    if (msg.success) {
+                        window.location.href = "/gio-hang";
+                    }
+                    else {
+                        alert(msg.messenger)
+                    }
+                }
+            });
+        }
+    </script>
+}
+

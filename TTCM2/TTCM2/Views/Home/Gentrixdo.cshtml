@@ -1,0 +1,157 @@
+﻿
+@{
+    ViewBag.Title = "Gentrixdo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container ">
+    <div class="row">
+        <div class="col-lg-5">
+            <div class="swiper-container gallery-top wsa-container wsa-gallery-top">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide imgs" style="background-image:url(../../images/getridox.jpg)"></div>
+                    <div class="swiper-slide imgs" style="background-image:url(../../images/gentrixdo/g1.jpg)"></div>
+                    <div class="swiper-slide imgs" style="background-image:url(../../images/gentrixdo/g2.jpg)"></div>
+                    <div class="swiper-slide imgs" style="background-image:url(../../images/gentrixdo/g3.jpg)"></div>
+
+                </div>
+                <!-- Add Arrows -->
+                <div class="swiper-button-next swiper-button-white"></div>
+                <div class="swiper-button-prev swiper-button-white"></div>
+            </div>
+            <div class="swiper-container gallery-thumbs wsa-gallery-thumbs">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide imgs" style="background-image:url(../../images/getridox.jpg)"></div>
+                    <div class="swiper-slide imgs" style="background-image:url(../../images/gentrixdo/g1.jpg)"></div>
+                    <div class="swiper-slide imgs" style="background-image:url(../../images/gentrixdo/g2.jpg)"></div>
+                    <div class="swiper-slide imgs" style="background-image:url(../../images/gentrixdo/g3.jpg)"></div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-7">
+            <div class="col-lg-12">
+                <p class="title-text">
+                    Getridox Khắc Tinh Của Ký Sinh Trung
+                </p>
+                <div class="title-text">
+                    <p class="CTSP-text1">Giá: 550000đ </p>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="CTSP-main">
+                    <div class="CTSP-gioithieu">
+                        <div class="border-main">
+                            <p class="CTSP-text1">
+                                Getridox là phương pháp được dùng với mục đích thanh lọc cơ thể, loại bỏ các chất độc hại tích tụ lâu ngày trong máu và da, đẩy lùi các căn bệnh liên quan đến giun sán, mụn cóc, tiêu chảy, rối loạn tiền đình. Làm cho chúng không có cơ hội hoành hành trong cơ thể con người.
+                            </p>
+
+                            <div class="CTSP-text1">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        Tình trạng:Luôn mới
+                                    </div>
+                                    <div class="col-lg-6">
+                                        Xuất xứ:Việt Nam
+
+                                    </div>
+                                    <div class="col-lg-6">
+                                        Quy cách:60 viên/hộp
+                                    </div>
+                                    <div class="col-lg-6">
+                                        Giấy phép:Chuẩn thực phẩm an toàn
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <button class="muahang btn-mua btn-add" type="submit"> Mua Hàng</button>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="border-main">
+                    <p class="title-text">
+                        chi tiết sản phẩm
+                    </p>
+                    <div class="GT-box">
+                        <p class="CTSP-text1">
+                            1.Thành phần thuốc:
+                            <br>
+                            Getrixdo là sản phẩm do việt nam sản xuất có các thành phần sau:
+                            <br>
+                            +Rau má
+                            <br>
+                            +Me rừng
+                            <br>
+                            +Nghệ
+                            <br>
+                            +Gotu-cola
+                        </p>
+                    </div>
+                    
+                    <div class="GT-box">
+                        <p class="CTSP-text1">
+                            2.Cách dùng:
+                            <br>
+                            +Tùy vào từng độ tuổi thì sẽ có cách dùng khác nhau:
+                            <br>
+                            +Đối với trẻ từ 3-6 tuổi thì nên dùng ngày tối thiểu 3 lần, vào 30 phút trước khi ăn.
+                            <br>
+                            +Đối với trẻ từ 6-13 tuổi thì nên dùng tối thiểu 3 lần, trước bữa ăn 30 phút.
+                            <br>
+                            +Đối với người lớn nên sử dụng ngà 2 lần, trước khi ăn 30 phút.
+
+
+                           
+                        </p>
+                    </div>
+                    <div class="GT-box">
+                        <p class="CTSP-text1">
+                            3.Đối tượng sử dụng:
+                            <br>
+                            Chỉ dùng cho người trên 3 tuổi
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+    <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+        var galleryThumbs = new Swiper('.gallery-thumbs', {
+            spaceBetween: 10,
+            slidesPerView: 4,
+            loop: true,
+            freeMode: true,
+            loopedSlides: 5, //looped slides should be the same
+            watchSlidesVisibility: true,
+            watchSlidesProgress: true,
+        });
+        var galleryTop = new Swiper('.gallery-top', {
+            spaceBetween: 10,
+            loop: true,
+            loopedSlides: 5, //looped slides should be the same
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            thumbs: {
+                swiper: galleryThumbs,
+            },
+        });
+    </script>
+}

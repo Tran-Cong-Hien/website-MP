@@ -1,0 +1,114 @@
+﻿@model Data.Products.Products
+@{
+    ViewBag.Title = "ThemMoiSanPham";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var ismull = (Model == null ? true : false);
+}
+
+<input type="hidden" class="form-control" id="id" value="@(ismull==false ? Model.Id: 0 )">
+
+<form id="signupForm">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputName">Tên Sản Phẩm </label>
+            <input type="text" class="form-control" id="inputName" name="inputName" placeholder="Tên Sản Phẩm" value="@(ismull==false ? Model.Name: "" )">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="exampleFormControlFile1">Ảnh  Sản Phẩm</label>
+            <input type="file" class="form-control-file" id="fu">
+            <input type="hidden" class="form-control" id="" value="@(ismull==false ? Model.images: "" )">
+            <input type="hidden" id="hdFileName" value="" />
+            <input type="hidden" id="hdGuidName" value="@(ismull==false ? Model.images: "" )" />
+        </div>
+        <div class="form-group col-md-4">
+            <label for="inputMakeIn">Xuất Xứ </label>
+            <input type="text" class="form-control" id="inputMakeIn" placeholder="Xuất Xứ" value="@(ismull==false ? Model.MakeIn: "" )">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="inputType">Quy cách </label>
+            <input type="text" class="form-control" id="inputType" placeholder="Quy cách" value="@(ismull==false ? Model.Type: "" )">
+        </div>
+
+        <div class="form-group col-md-4">
+            <label for="inputAllower">Giấy phép </label>
+            <input type="text" class="form-control" id="inputAllower" placeholder="Giấy phép" value="@(ismull==false ? Model.Allower: "" )">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="inputPrice">Giá tiền </label>
+            <input type="number" class="form-control" id="inputPrice" placeholder="Giá tiền" value="@(ismull==false ? Model.Price: 0 )">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="inputPriceSale">Giá khuyến mãi </label>
+            <input type="number" class="form-control" id="inputPriceSale" placeholder="Giá khuyến mãi" value="@(ismull==false ? Model.PriceSale: 0 )">
+        </div>
+        <div class="form-group col-md-12">
+            <label for="inputNote">Mô tả ngắn </label>
+            <textarea class="form-control" id="inputNote" placeholder="Mô tả ngắn">@(ismull==false ? Model.Note: "" )</textarea>
+        </div>
+        <div class="form-group col-md-12">
+            <label for="inputMoTa">Mô tả sản phẩm </label>
+            <textarea class="form-control" id="MoTaChiTiet" placeholder="Mô tả chi tiết sản phẩm " rows="10" cols="50">"@(ismull==false ? Model.NoteDetail: "" )</textarea>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Cập nhật</button>
+</form>
+
+@section scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/uploadfile/jquery.html5uploader.min.js"></script>
+    <script src="~/Scripts/uploadfile/elnino.drag-upload.js"></script>
+    <script type="text/javascript">
+        pnlContainer = 'pnlTemplateFile';
+        pnlDragUpload = 'pnlDragTemplateFile';
+        fileUploadControl = 'fu';
+        isFullUpload = '1';
+        ReloadDragUpload();
+    </script>
+   
+    <script>
+        $("#signupForm").validate({
+            rules: {
+                inputName: {
+                    required: true,
+                },
+
+            },
+            messages: {
+                inputName: {
+                    required: "Vui lòng nhập tên sản phẩm!",
+                },
+            },
+            submitHandler: function (e) {
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Admin/SanPham/ThemMoi",
+                    data: {
+                        'Id': $("#id").val(),
+                        'Name': $("#inputName").val(),
+                        'Price': $("#inputPrice").val(),
+                        'PriceSale': $("#inputPriceSale").val(),
+                        'Url': $("#url").val(),
+                        'Note': $("#inputNote").val(),
+                        'Type': $("#inputType").val(),
+                        'MakeIn': $("#inputMakeIn").val(),
+                        'Allower': $("#inputAllower").val(),
+                        'NoteDetail': $("#MoTaChiTiet").val(),
+                        'images': $("#hdGuidName").val()
+                    },
+                    dataType: "json",
+                    success: function (msg) {
+                        if (msg.success) {
+                            alert(msg.messenger);
+                            window.location.href = "/Admin/SanPham/DanhSachSanPham";
+                        }
+                        else {
+                            alert(msg.messenger)
+                        }
+                    }
+                });
+
+            }
+        });
+    </script>
+}

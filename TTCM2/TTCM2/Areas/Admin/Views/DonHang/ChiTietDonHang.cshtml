@@ -1,0 +1,127 @@
+﻿@model List<Data.LineOrder.LineOrder>
+@{
+    ViewBag.Title = "ChiTietDonHang";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<style>
+    .img-admin {
+        width: 120px;
+        border: 1px solid #eee;
+    }
+
+        .img-admin img {
+            max-width: 100%;
+        }
+</style>
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Danh sách Khách Hàng</h1>
+    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+</div>
+<div class="card shadow mb-4">
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID sản phẩm</th>
+                        <th>Tên sản phẩm</th>
+
+                        <th>giá</th>
+                        <th>số lượng</th>
+                                            
+                        <th>Hoạt động</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    
+                    <tr>
+                        <th>ID sản phẩm</th>
+                        <th>Tên sản phẩm</th>
+
+                        <th>giá</th>
+                        <th>số lượng</th>
+
+                        <th>Hoạt động</th>
+                    </tr>
+                    
+                </tfoot>
+                <tbody>
+                    @if (Model.Count() > 0)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <td>
+
+                                    @item.IdProduct
+
+
+                                </td>
+                                <td>
+                                    <a href="/san-pham/@item.Url" target="_blank">
+                                        @item.NameProduct
+                                   </a> 
+                                </td>
+                                <td>
+                                    @item.Price
+                                </td>
+                                <td>
+                                    @item.Amount
+                                </td>
+                                
+                                <td>
+                                    <span style="display:block">Người tạo: @item.CreateBy</span>
+                                    <span style="display:block">Người sửa: @(string.IsNullOrEmpty(item.UpdateBy) ? "Đang cập nhật" : item.UpdateBy)</span>
+                                    <span style="display:block">Ngày tạo: @item.CreateDate.ToString("dd/MM/yyyy")</span>
+                                </td>
+                                <td style="text-align:center; vertical-align:middle">
+                                    <a href="javascript: Edit(@item.Id)" class="btn btn-primary btn-circle btn-sm">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="javascript: Delete(@item.Id)" class="btn btn-danger btn-circle btn-sm">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+        });
+
+        function Delete(Id) {
+            if (confirm('Bạn chắc chắn muốn xóa đơn hàng này chứ')) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Admin/DonHang/Delete",
+                    data: { 'Id': Id },
+                    dataType: "json",
+                    success: function (msg) {
+                        if (msg.success) {
+                            alert(msg.messenger);
+                            window.location.href = "/Admin/DonHang/ChiTietDonHang";
+                        }
+                        else {
+                            alert(msg.messenger)
+                        }
+                    }
+                });
+            }
+        }
+    </script>
+}
+
+

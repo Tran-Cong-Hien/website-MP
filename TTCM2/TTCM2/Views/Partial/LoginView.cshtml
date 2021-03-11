@@ -1,0 +1,30 @@
+﻿@model Data.Customer.Customer
+
+@if (string.IsNullOrEmpty(Model.Email))
+{
+    <div class="accoutn">
+        <div class="col-lg-6">
+            <div class="ac-box1"><a href="/dang-nhap">Đăng nhập</a></div>
+        </div>
+        <div class="col-lg-6">
+            <div class="ac-box2">
+                <a href="/dang-ky">Đăng ký</a>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="accoutn">
+        <div class="accoutn">
+        <div class="col-lg-12">
+            <div class="ac-box"><a href="/"><i class="fa fa-user"></i> @Model.Email</a></div>
+        </div>
+        <div class="col-lg-12">
+            <div class="ac-box">
+                <a href="javascript: Logout()">Đăng xuất</a>
+            </div>
+        </div>
+    </div>
+    </div>
+}

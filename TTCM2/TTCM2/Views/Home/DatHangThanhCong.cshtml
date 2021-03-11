@@ -1,0 +1,128 @@
+﻿@model Data.Order.OrderCartSuccess
+
+@{
+    ViewBag.Title = "Đặt Hàng Thành Công";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Đặt Hàng Thành Công</h2>
+
+<div class="container pad-50">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="ts-ad"><span>Địa chỉ nhận hàng</span></div>
+            <form id="signupForm">
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-3 col-form-label text-rights opsize"><b>Email</b></label>
+                    <div class="col-sm-9">
+                        <span>@Model.DonHang.Email</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-3 col-form-label text-rights opsize"><b>Họ tên</b></label>
+                    <div class="col-sm-9">
+                        <span>@Model.DonHang.Name</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-3 col-form-label text-rights opsize"><b>Số điện thoại</b></label>
+                    <div class="col-sm-9">
+                        <span>@Model.DonHang.Phone</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-3 col-form-label text-rights opsize"><b>Địa chỉ</b></label>
+                    <div class="col-sm-9">
+                        <span>@Model.DonHang.Adress</span>
+                    </div>
+                </div>
+                @*<div class="form-group row">
+                    <label for="inputPassword" class="col-sm-3 col-form-label text-rights opsize"><b>Ghi chú</b></label>
+                    <div class="col-sm-9">
+                        <span>@Model.DonHang.</span>
+                    </div>
+                </div>*@
+                @*<div class="form-group row hidden-sm hidden-xs">
+                    <div class="col-sm-6 col-7">
+                        <a class="btn btn-light pull-left opsize" href="/">MUA THÊM</a>
+                    </div>
+                    <div class="col-sm-6 col-5">
+                        <button class="btn btn-thanhtoan pull-right opsize" type="submit" id="btn-tt">THANH TOÁN</button>
+                    </div>
+                </div>*@
+            </form>
+        </div>
+        <div class="col-md-6">
+            <div id="load-casf" class="order">
+                <div id="cart-info" class="cart-info">
+                    <h2 class="title-secres">Giỏ Hàng</h2>
+                    <ul class="list-unstyled">
+                        @if (Model.listSanpham.Count() > 0)
+                        {
+                            foreach (var item in Model.listSanpham)
+                            {
+                                <li>
+                                    <figure>
+                                        <a class="cart_list_product_img" href="/san-pham/@item.Url" title="@item.Name">
+                                            <img src="https://adminbeauty.hvnet.vn/Upload/Files/sua-rua-mat-Simple-Kind-To-Skin-Refreshing-Facial-Wash-Gel-beauty-garden-1.jpeg?width=350&amp;height=391" alt="Sữa rửa mặt Simple Kind To Skin Refreshing " class="img-reponsive imds">
+                                        </a>
+                                    </figure>
+                                    <div class="list_content">
+                                        <h5>
+                                            <a href="/san-pham/@item.Url" title="@item.Name">
+                                                <span class="name-ps">@item.Name</span>
+                                            </a>
+
+                                        </h5>
+                                        <div class="quantity">
+                                            @item.Amount x
+                                            <span class="amount">
+                                                <span class="money" style="color: #199427; font-size: 14px !important;">
+                                                    @string.Format("{0:#,0}", item.Price)₫
+                                                </span>
+                                            </span>
+                                            <div class="pull-right tt">
+                                                @string.Format("{0:#,0}", item.AllPrice)₫
+                                            </div>
+                                        </div>
+                                        <div class="iserror">
+                                        </div>
+                                    </div>
+                                    <div class="clr"></div>
+                                </li>
+                            }
+                        }
+
+                    </ul>
+                    <div class="load-lead">
+                        <div class="box-coupon">
+                            <p class="list-info-price" id="price-before" data-id="318000">
+                                <small class="color-black">Tạm tính: </small> <span style="color:green">@string.Format("{0:#,0}", Model.DonHang.IntoMoney)₫</span>
+                            </p>
+                        </div>
+                    </div>
+                    <!--Tổng số tiền-->
+                    <div class="load-giamgia hide" id="fac" data-id="False">
+                        <div class="box-coupon">
+                            <p class="list-info-price" id="pricetotalmis" data-id="318000">
+                                <small class="color-black">Giảm giá: </small> <span>- ₫</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="subtotal">
+                        Thành tiền:
+                        <span>
+                            <span class="amount">
+                                <strong class="money lucal" style="color: #e54d42;"> @string.Format("{0:#,0}", Model.DonHang.IntoMoney)₫ </strong>
+                            </span>
+                        </span>
+                    </div>
+                    <div class="pttt">
+                        <span>* Phương thức thanh toán: Nhận hàng &amp; thanh toán tiền mặt tại nhà</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

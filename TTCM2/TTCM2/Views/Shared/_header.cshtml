@@ -1,0 +1,38 @@
+﻿
+<div class="menu-box">
+    <div class="menu-logo">
+        <a href="/">
+            <img src="~/Models/logo.png" alt="logo teo" class="img-responsive" />
+        </a>
+    </div>
+    <div class="box-gh">
+        <a href="/gio-hang" class="cart-des">
+            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+            <span class="numbas">0</span>
+        </a>
+    </div>
+    @{Html.RenderAction("LoginView", "Partial");}
+    <div class="menu-group a-center">
+        <ul class="group a-center">
+            <li class="group-row">
+                <a href="/"> Trang chủ</a>
+            </li>
+            <li class="group-row">
+                <a href="/gioi-thieu"> về chúng tôi</a>
+            </li>
+            <li class="group-row">
+                <a href="javascript:void(0)">sản phẩm</a>
+                <i class="fa fa-angle-down" onclick="showmenu(this)"></i>
+                <ul class="menu-child" id="menu-child">
+                    @{Html.RenderAction("MenuLeft", "Partial");}
+                </ul>
+            </li>
+            <li class="group-row">
+                <a href="/tin-tuc"> tin tức</a>
+            </li>
+            <li class="group-row">
+                <a href="/lien-he"> liên hệ</a>
+            </li>
+        </ul>
+    </div>
+</div>

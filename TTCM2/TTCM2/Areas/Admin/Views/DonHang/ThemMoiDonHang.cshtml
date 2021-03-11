@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "ThemMoiDonHang";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<form>
+    <div class="form-group">
+        <label for="inputID">Mã Đơn Hàng</label>
+        <input type="text" class="form-control" id="inputID" placeholder="Mã đơn hàng">
+    </div>
+    <div class="form-row">
+
+        <div class="form-group col-md-4">
+            <label for="inputMaSP">Mã Sản Phẩm</label>
+            <input type="text" class="form-control" id="inputMaSP" placeholder="Mã sản phẩm">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="inputID">Tên Sản Phẩm </label>
+            <input type="text" class="form-control" id="inputsanpham" placeholder="Tên Sản Phẩm">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="inputSoLuong">Số lượng</label>
+            <input type="text" class="form-control" id="inputSoLuong" placeholder="Số lượng">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="inputTongTien">Tổng tiền</label>
+            <input type="text" class="form-control" id="inputTongTien" placeholder="Tổng tiền">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputMaKH">Mã Khách Hàng</label>
+            <input type="text" class="form-control" id="inputMaKH" placeholder="Mã Khách Hàng">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputTenKhachHang">Tên Khách Hàng</label>
+            <input type="text" class="form-control" id="inputTenKhachHang" placeholder="Tên Khách Hàng">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputSDT">Số điện thoại</label>
+            <input type="text" class="form-control" id="inputSDT" placeholder="Số điện thoại">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputAddress">Địa chỉ</label>
+            <input type="text" class="form-control" id="inputAddress" placeholder="Địa chỉ">
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="gridCheck">
+            <label class="form-check-label" for="gridCheck">
+                Xác nhận đơn Hàng
+            </label>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Thêm</button>
+    <button type="submit" class="btn btn-primary">Sửa</button>
+</form>
+

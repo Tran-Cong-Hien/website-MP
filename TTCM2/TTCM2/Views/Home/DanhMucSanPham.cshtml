@@ -1,0 +1,59 @@
+﻿@model Data.Products.ProductsFollowCateGory
+@{
+    ViewBag.Title = Model.NameCategory;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var isnullModel = (Model == null ? false : true);
+}
+
+@if (isnullModel)
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p class="title-text">
+                    Danh Mục Sản Phẩm
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-xs-12 col-md-12">
+                <div class="text">
+                    <h2 style="font-size:20px;float:left; margin-bottom:25px;">
+                        @(string.IsNullOrEmpty(Model.NameCategory) ? "Cập nhật" : Model.NameCategory)
+                    </h2>
+                </div>
+            </div>
+            <div class="col-lg-12  col-md-12 col-xs-12">
+                <div class="row">
+                    @if (Model.ListProduct.Count() > 0)
+                    {
+                        foreach (var item in Model.ListProduct)
+                        {
+                            <div class="col-lg-3  col-md-6 col-xs-6">
+                                @{Html.RenderPartial("_product", item);}
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-warning" role="alert">
+                    <h4 class="alert-heading">Missa Care!</h4>
+                    <p>Danh mục hiện tại không tồn tại</p>
+                    <hr>
+                    <p class="mb-0">Thank you!.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+

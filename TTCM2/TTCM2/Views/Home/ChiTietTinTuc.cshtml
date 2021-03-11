@@ -1,0 +1,20 @@
+﻿@model Data.News.News
+
+
+@{
+    ViewBag.Title = "ChiTietTinTuc";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-lg-12">
+        <p class="title-text">
+            @Model.Name
+        </p>
+    </div>
+    <div class="col-lg-12">
+        @Html.Raw(Model.NoteDetail)
+    </div>
+</div>
+
+
+

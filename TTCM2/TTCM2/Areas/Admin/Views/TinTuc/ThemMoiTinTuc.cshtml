@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "ThemMoiTinTuc";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<form>
+
+    <div class="form-row">
+
+        <div class="form-group col-md-4">
+            <label for="inputMaTT">Mã tin tức</label>
+            <input type="text" class="form-control" id="inputMaTT" placeholder="Mã tin tức">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="inputTenTT">Tên tin tức </label>
+            <input type="text" class="form-control" id="inputTenTT" placeholder="Tên tin tức">
+        </div>
+        <div class="form-group col-md-4">
+
+            <label for="exampleFormControlFile1">ADD FILE</label>
+            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="inputNgayXB">Ngày xuất bản </label>
+            <input type="date" class="form-control" id="inputNgayXB" placeholder="Ngày xuất bản">
+        </div>
+    </div>
+    <div class="form-group ">
+        <label for="inputMoTaTT">Mô tả Tin Tức </label>
+        <input type="text" class="form-control" id="inputMoTaTT" placeholder="Mô tả Tin Tức ">
+    </div>
+    <div class="form-group">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="gridCheck">
+            <label class="form-check-label" for="gridCheck">
+                Xác nhận đăng tin
+            </label>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Thêm</button>
+    <button type="submit" class="btn btn-primary">Sửa</button>
+
+</form>

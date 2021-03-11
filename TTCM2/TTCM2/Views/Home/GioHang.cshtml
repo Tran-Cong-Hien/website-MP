@@ -1,0 +1,188 @@
+﻿@model Data.Products.OrderCart
+@{
+    ViewBag.Title = "Giỏ hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Giỏ hàng</h2>
+
+<div class="container pad-50">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="ts-ad"><span>Địa chỉ nhận hàng</span></div>
+            <form id="signupForm">
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-3 col-form-label text-rights opsize"><b>Email</b></label>
+                    <div class="col-sm-9">
+                        <input type="email" class="form-control opsize " id="txtEmail" name="txtEmail" placeholder="VD: nguyenvana@gmail.com">
+                        <div class="invalid-feedback" id="val-txtEmail">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-3 col-form-label text-rights opsize"><b>Họ tên</b></label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control opsize" id="txtName" name="txtName" placeholder="VD: Nguyễn Văn A (*)" onchange="AddCookie('Name','txtName')">
+                        <div class="invalid-feedback" id="val-txtName">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-3 col-form-label text-rights opsize"><b>Số điện thoại</b></label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control opsize" id="txtPhone" name="txtPhone" placeholder="VD: 0909 099 099 (*)">
+                        <div class="invalid-feedback" id="val-txtPhone">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-3 col-form-label text-rights opsize"><b>Địa chỉ</b></label>
+                    <div class="col-sm-9">
+                        <textarea id="txtAdress" class="form-control opsize" name="txtAdress" placeholder="Số nhà, đường, phường xã..."></textarea>
+                        <div class="invalid-feedback" id="val-txtAdress">
+
+                        </div>
+                    </div>
+                </div>
+                @*<div class="form-group row">
+                    <label for="inputPassword" class="col-sm-3 col-form-label text-rights opsize"><b>Ghi chú</b></label>
+                    <div class="col-sm-9">
+                        <textarea id="txtNote" name="txtNote" class="form-control opsize" placeholder="VD: Giao hàng vào buổi chiều"></textarea>
+                    </div>
+                </div>*@
+                <div class="form-group row hidden-sm hidden-xs">
+                    <div class="col-sm-6 col-7">
+                        <a class="btn btn-light pull-left opsize" href="/">MUA THÊM</a>
+                    </div>
+                    <div class="col-sm-6 col-5">
+                        <button class="btn btn-thanhtoan pull-right opsize" type="submit" id="btn-tt" @(Model.listSanpham.Count() == 0 ? "disabled":"")>THANH TOÁN</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <div id="load-casf" class="order">
+                <div id="cart-info" class="cart-info">
+                    <h2 class="title-secres">Giỏ Hàng</h2>
+                    <ul class="list-unstyled">
+                        @if (Model.listSanpham.Count() > 0)
+                        {
+                            foreach (var item in Model.listSanpham)
+                            {
+                                <li>
+                                    <figure>
+                                        <a class="cart_list_product_img" href="/san-pham/@item.Url" title="@item.Name">
+                                            <img src="https://adminbeauty.hvnet.vn/Upload/Files/sua-rua-mat-Simple-Kind-To-Skin-Refreshing-Facial-Wash-Gel-beauty-garden-1.jpeg?width=350&amp;height=391" alt="Sữa rửa mặt Simple Kind To Skin Refreshing " class="img-reponsive imds">
+                                        </a>
+                                    </figure>
+                                    <div class="list_content">
+                                        <h5>
+                                            <a href="/san-pham/@item.Url" title="@item.Name">
+                                                <span class="name-ps">@item.Name</span>
+                                            </a>
+
+                                        </h5>
+                                        <div class="quantity">
+                                            @item.Quality x
+                                            <span class="amount">
+                                                <span class="money" style="color: #199427; font-size: 14px !important;">
+                                                    @string.Format("{0:#,0}", item.PriceSale == 0 ? item.Price : item.PriceSale)₫
+                                                </span>
+                                                <span class="@(item.PriceSale==0 ? "hide":"")" style="text-decoration: line-through; font-size: 12px; padding-left: 12px;">
+                                                    @string.Format("{0:#,0}", item.PriceSale)₫
+                                                </span>
+                                            </span>
+                                            <div class="pull-right tt">
+                                                @string.Format("{0:#,0}", item.AllPrice)₫
+                                            </div>
+                                        </div>
+                                        <div class="iserror">
+                                        </div>
+                                    </div>
+                                    <div class="clr"></div>
+                                </li>
+                            }
+                        }
+
+                    </ul>
+                    <div class="load-lead">
+                        <div class="box-coupon">
+                            <p class="list-info-price" id="price-before" data-id="318000">
+                                <small class="color-black">Tạm tính: </small> <span style="color:green">@string.Format("{0:#,0}", Model.TamTinh)₫</span>
+                            </p>
+                        </div>
+                    </div>
+                    <!--Tổng số tiền-->
+                    <div class="load-giamgia hide" id="fac" data-id="False">
+                        <div class="box-coupon">
+                            <p class="list-info-price" id="pricetotalmis" data-id="318000">
+                                <small class="color-black">Giảm giá: </small> <span>- ₫</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="subtotal">
+                        Thành tiền:
+                        <span>
+                            <span class="amount">
+                                <strong class="money lucal" style="color: #e54d42;"> @string.Format("{0:#,0}", Model.AllPayment)₫ </strong>
+                            </span>
+                        </span>
+                    </div>
+                    <div class="pttt">
+                        <span>* Phương thức thanh toán: Nhận hàng &amp; thanh toán tiền mặt tại nhà</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script>
+        $("#signupForm").validate({
+            rules: {
+                txtAdress: "required",
+                txtName: {
+                    required: true,
+                },
+                txtEmail: {
+                    required: true,
+                    email: true
+                },
+                txtPhone: {
+                    required: true,
+                    minlength: 9
+                },
+            },
+            messages: {
+                txtAdress: "Bạn vui lòng nhập địa chỉ!",
+                txtName: {
+                    required: "Bạn vui lòng nhập họ tên!",
+                },
+                txtEmail: "Bạn vui lòng nhập email!",
+                txtPhone: "Bạn vui lòng nhập số điện thoại!",
+            },
+            submitHandler: function (e) {
+
+                $.ajax({
+                    type: "POST",
+                    url: "/ajax/InnerCart",
+                    data: { 'Name': $("#txtName").val(), 'Phone': $("#txtPhone").val(), 'Adress': $("#txtAdress").val(), 'Email': $("#txtEmail").val() },
+                    dataType: "json",
+                    success: function (msg) {
+                        if (msg.success) {
+                            window.location.href = "/dat-hang-thanh-cong";
+                        }
+                        else {
+                            alert(msg.messenger)
+                        }
+                    }
+                });
+
+            }
+        });
+    </script>
+}

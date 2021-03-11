@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link href="~/Content/Site.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="overlay overlay-hide" onclick="showmenumb()"></div>
+    <div class="box-menu-mb hidden-lg hidden-md">
+        <div class="col-3-mb">
+            <button onclick="showmenumb()" class="btn-mb"><i class="fa fa-bars" aria-hidden="true"></i></button>
+        </div>
+        <div class="col-6-mb">
+            <div class="menu-logo-mb">
+                <a href="/">
+                    <img src="~/Models/logo.png" alt="logo teo" class="img-responsive" />
+                </a>
+            </div>
+        </div>
+        <div class="col-3-mb">
+            <a href="/gio-hang" class="cart-mb">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                <span class="numbas">8</span>
+            </a>
+        </div>
+    </div>
+    <div class="container body-content">
+        <div class="row">
+            <div class="col-lg-2 col-md-2 col-xs-12 width-mobile">
+                @Html.Partial("_header")
+            </div>
+            <div class="col-lg-10 col-md-10 col-xs-12">
+                @RenderBody()
+                @Html.Partial("_footer")
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script>
+        $(document).ready(function () {
+            CountCart();
+        });
+        var isshow = 0;
+        function showmenu(e) {
+            $(e).toggleClass('fa-angle-down').toggleClass('fa-angle-up');
+            $("#menu-child").slideToggle('menu-child-show');
+        }
+        function showmenumb() {
+            if (isshow == 0) {
+                $(".width-mobile").addClass('width-mobile-show');
+                $(".overlay").removeClass('overlay-hide');
+                isshow = 1;
+            }
+            else {
+                $(".width-mobile").removeClass('width-mobile-show');
+                $(".overlay").addClass('overlay-hide');
+                isshow = 0;
+            }
+        }
+        $(window).scroll(function () {
+            $(this).scrollTop() > 50 ? $(".box-menu-mb").addClass("fixed") : $(".box-menu-mb").removeClass("fixed")
+        });
+
+        function CountCart() {
+            $.ajax({
+                type: "POST",
+                url: "/ajax/CountCart",
+                dataType: "json",
+                success: function (msg) {
+                    if (msg.success) {
+                        $(".numbas").html(msg.count)
+                    }
+                    else {
+                        alert(msg.messenger)
+                    }
+                }
+            });
+        }
+        function Logout() {
+            $.ajax({
+                type: "POST",
+                url: "/ajax/LogOut",
+                dataType: "json",
+                success: function (msg) {
+                    if (msg.success) {
+                        window.location.href = "/";
+                    }
+                    else {
+                        alert(msg.messenger)
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

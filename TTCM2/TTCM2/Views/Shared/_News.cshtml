@@ -1,0 +1,11 @@
+﻿@model Data.News.News
+
+<div class="new-box">
+    <img src="~/images/tin_1.jpg" class="img-responsive" alt="@Model.Name" />
+    <div class="ghichu">
+        <h3><a href="/tin-tuc/@Model.Url"> @Model.Name </a></h3>
+        <p class="chuthich">
+            @Model.Note
+        </p>
+    </div>
+</div>

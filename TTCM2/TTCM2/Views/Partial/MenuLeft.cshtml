@@ -1,0 +1,10 @@
+﻿@model List<Data.CategoryProduct.CategoryProduct>
+
+
+@if (Model.Count() > 0)
+{
+    foreach (var it in Model)
+    {
+        <li><a href="/danh-muc/@it.Url">@it.Name</a></li>
+    }
+}

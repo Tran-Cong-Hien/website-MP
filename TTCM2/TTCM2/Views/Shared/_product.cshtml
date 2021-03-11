@@ -1,0 +1,16 @@
+﻿@model Data.Products.Products
+
+<div class="sanpham">
+    <div class="anhsanpham">
+        <img src="/upload/Temp/@Model.images" class="img-responsive" alt="@Model.Name" />
+    </div>
+    <div class="a-center dep ">
+        <div class="ghichu">
+            <a href="/san-pham/@Model.Url"> @Model.Name </a>
+        </div>
+        <div class="price">
+            <span>@string.Format("{0:#,0}", Model.PriceSale)đ</span>
+            <span>@string.Format("{0:#,0}", Model.Price)đ</span>
+        </div>
+    </div>
+</div>

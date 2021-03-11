@@ -1,0 +1,6 @@
+D:\mvc\TTCM2\Data\bin\Debug\Data.dll
+D:\mvc\TTCM2\Data\bin\Debug\Data.pdb
+D:\mvc\TTCM2\Data\obj\Debug\Data.csproj.CoreCompileInputs.cache
+D:\mvc\TTCM2\Data\obj\Debug\Data.dll
+D:\mvc\TTCM2\Data\obj\Debug\Data.pdb
+D:\mvc\TTCM2\Data\obj\Debug\Data.csprojAssemblyReference.cache
